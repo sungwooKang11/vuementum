@@ -8,8 +8,12 @@
 
 export default {
   name: 'App',
+  data() {
+    return {
+      
+    }
+  },
   components: {
-    API_KEY = "20d3ea9ebdb399b0edf375ee7d5085c0",
     
   }
 }
