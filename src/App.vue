@@ -39,7 +39,6 @@ export default {
                   this.temper = data.temp;
                 console.log(url);
           })
-      
     },
     geoError() {
       alert("Where are you?");
