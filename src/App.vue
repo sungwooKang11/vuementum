@@ -1,7 +1,9 @@
 <template>
   <div class="w_container">
-    <div v-for="(day, i) in weather" :key="i">
-      <span>{{day.weather[0].description}}</span><br>
+    <div class="dayWeather" v-for="(day, i) in weather" :key="i">
+      <span>{{day.weather[0].dt}}</span><br>
+      <span>{{day.weather[0].main}}</span><br>
+      <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
     </div>
   </div>
   
@@ -31,7 +33,7 @@ export default {
           .then(response => response.json())//여기도 추가공부...
           .then(data => {
             this.weather = data.daily;
- 
+
             console.log(url);
           })
     },
@@ -48,5 +50,16 @@ export default {
 <style>
 body {
   width: 100%;
+}
+
+.w_container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  width: 415px;
+}
+
+.dayWeather {
+  padding: 5px;
 }
 </style>
