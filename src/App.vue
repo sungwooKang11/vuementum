@@ -1,7 +1,8 @@
 <template>
   <div class="w_container">
-    <span>{{weather}}</span><br>
-    <span>{{temper}}</span><br>
+    <div v-for="(day, i) in weather" :key="i">
+      <span>{{day.weather[0].description}}</span><br>
+    </div>
   </div>
   
 </template>
@@ -14,11 +15,9 @@ export default {
   data() {
     return {
      weather: "",
-
-     temper: "",
-
     }
   },
+
   components: {
     
   },
@@ -26,14 +25,14 @@ export default {
     geoGood(position) {
       const lat = position.coords.latitude; //위도 설정
       const lon = position.coords.longitude; //경도 설정
-      let url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=7&appid=${API_KEY}&units=metric`;
+      let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=${API_KEY}&units=metric`;
+      //37.580725449950116, 127.21733011159394
       fetch(url)
           .then(response => response.json())//여기도 추가공부...
           .then(data => {
-                  this.weather = data.daily;
-                  this.city = data.name;
-                  this.temper = data.temp;
-                console.log(url);
+            this.weather = data.daily;
+ 
+            console.log(url);
           })
     },
     geoError() {
