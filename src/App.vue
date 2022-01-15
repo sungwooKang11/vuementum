@@ -1,7 +1,7 @@
 <template>
   <div class="w_container">
     <div class="dayWeather" v-for="(day, i) in weather" :key="i">
-      <span>{{day.weather[0].dt}}</span><br>
+      <span>{{day.weather[0].date}}</span><br>
       <span>{{day.weather[0].main}}</span><br>
       <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
     </div>
