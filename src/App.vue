@@ -38,7 +38,7 @@ export default {
           })
     },
     geoError() {
-      alert("Where are you?");ddd
+      alert("Where are you?");
     }
   },
   mounted() {
