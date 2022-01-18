@@ -6,7 +6,18 @@
       <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
     </div>
   </div>
-  
+  <form @submit="handleSubmit">
+    <input class="link" v-model="linkValue" required placeholder="Please write your link">
+    <input class="explain" v-model="explainValue" required placeholder="Write your link name">
+    <input type="submit">
+  </form>
+  <div >
+    <div v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
+      <span>{{bookmark.explain}}</span>
+      <a v-bind:href="bookmark.link">{{bookmark.link}}</a>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -17,6 +28,9 @@ export default {
   data() {
     return {
      weather: "",
+     linkValue: "",
+     explainValue: "",
+     bookMarks: [],
     }
   },
 
@@ -39,6 +53,16 @@ export default {
     },
     geoError() {
       alert("Where are you?");
+    },
+    handleSubmit(a) {
+      a.preventDefault();
+      const bookmark = {
+        link: this.linkValue,
+        explain: this.explainValue,
+        id: Date.now(),
+      }
+      this.bookMarks.push(bookmark);
+      console.log(this.bookMarks);
     }
   },
   mounted() {
