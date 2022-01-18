@@ -6,15 +6,15 @@
       <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
     </div>
   </div>
-  <form @submit="handleSubmit">
+  <form class="bookmarkForm" @submit="handleSubmit">
     <input class="link" v-model="linkValue" required placeholder="Please write your link">
     <input class="explain" v-model="explainValue" required placeholder="Write your link name">
-    <input type="submit">
+    <input class="submitBtn" type="submit">
   </form>
-  <div >
-    <div v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
-      <span>{{bookmark.explain}}</span>
-      <a v-bind:href="bookmark.link">{{bookmark.link}}</a>
+  <div class="bmListDiv1">
+    <div class="bmListDiv2" v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
+      <span class="bmExplain">{{bookmark.explain}}</span>
+      <a class="link" v-bind:href="bookmark.link">{{bookmark.link}}</a>
     </div>
   </div>
 
