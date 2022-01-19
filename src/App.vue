@@ -61,7 +61,7 @@ export default {
         explain: this.explainValue,
         id: Date.now(),
       }
-      this.bookMarks.push(bookmark);
+      this.bookMarks.push(bookmark);//북마크 생성
       console.log(this.bookMarks);
     }
   },
