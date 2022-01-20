@@ -6,6 +6,11 @@
       <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
     </div>
   </div>
+
+  <form class="searchForm">
+    <input class="search" placeholder="search">
+  </form>
+
   <form class="bookmarkForm" @submit="handleSubmit">
     <input class="link" v-model="linkValue" required placeholder="Please write your link">
     <input class="explain" v-model="explainValue" required placeholder="Write your link name">
