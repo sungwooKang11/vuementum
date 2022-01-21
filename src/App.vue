@@ -7,8 +7,8 @@
     </div>
   </div>
 
-  <form class="searchForm">
-    <input class="search" placeholder="search">
+  <form class="searchForm" action="https://www.google.com/search" method="GET">
+    <input class="search" name="q" placeholder="search">
   </form>
 
   <form class="bookmarkForm" @submit="handleSubmit">
