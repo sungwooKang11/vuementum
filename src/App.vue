@@ -1,9 +1,14 @@
 <template>
   <div class="w_container">
-    <div class="dayWeather" v-for="(day, i) in weather" :key="i">
-      <span>{{day.weather[0].date}}</span><br>
-      <span>{{day.weather[0].main}}</span><br>
-      <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
+    <div class="upper">
+      
+    </div>
+    <div class="down">
+      <div class="dayWeather" v-for="(day, i) in weather" :key="i">
+        <span>{{day.weather[0].date}}</span><br>
+        <span>{{day.weather[0].main}}</span><br>
+        <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}°</span>
+      </div>
     </div>
   </div>
 
@@ -18,7 +23,7 @@
   </form>
   <div class="bmListDiv1">
     <div class="bmListDiv2" v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
-      <span class="bmExplain">{{bookmark.explain}}</span>
+      <span class="bmExplain">{{bookmark.explain}}</span><br>
       <a class="link" v-bind:href="bookmark.link">{{bookmark.link}}</a>
     </div>
   </div>
@@ -82,14 +87,27 @@ body {
 }
 
 .w_container {
-  display: flex;
-  flex-direction: row;
+  width: 800px;
+  height: 372px;
   border: 1px solid black;
-  width: 415px;
+  border-radius: 30px;
+  background-color: #5bd68e4d;
+}
+
+.upper {
+  width: 800px;
+  height: 186px;
+}
+
+.down {
+    width: 800px;
+    height: 186px;
+    display: flex;
 }
 
 .dayWeather {
   padding: 5px;
+  width: 100%;
 }
 </style>
 
