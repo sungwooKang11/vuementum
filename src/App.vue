@@ -103,6 +103,7 @@ body {
     width: 800px;
     height: 186px;
     display: flex;
+    flex-direction: column;
 }
 
 .dayWeather {
