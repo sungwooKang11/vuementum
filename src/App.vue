@@ -17,8 +17,8 @@
   </form>
 
   <form class="bookmarkForm" @submit="handleSubmit">
-    <input class="link" v-model="linkValue" required placeholder="Please write your link">
-    <input class="explain" v-model="explainValue" required placeholder="Write your link name">
+    <input class="linkInput" v-model="linkValue" required placeholder="Please write your link">
+    <input class="explainInput" v-model="explainValue" required placeholder="Write your link name">
     <input class="submitBtn" type="submit">
   </form>
   <div class="bmListDiv1">
@@ -103,12 +103,28 @@ body {
     width: 800px;
     height: 186px;
     display: flex;
-    flex-direction: column;
 }
 
 .dayWeather {
   padding: 5px;
   width: 100%;
+}
+
+.bookmarkForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.linkInput {
+  width: 200px;
+}
+
+.explainInput {
+    width: 200px;
+}
+
+.submitBtn {
+  width: 50px;
 }
 </style>
 
