@@ -1,4 +1,16 @@
 <template>
+  <div class="all">  
+    <div class="right">
+      <div class="Rheader"></div>
+      <div class="Rmiddle"></div>
+      <div class="Rfooter"></div>
+    </div>
+    <div class="left">
+      <div class="Lheader"></div>
+      <div class="Lmiddle"></div>
+      <div class="Lfooter"></div>
+    </div>
+  </div>  
   <div class="w_container">
     <div class="upper">
       
@@ -86,12 +98,68 @@ body {
   width: 100%;
 }
 
+.all {
+  display: flex;
+}
+
+.right {
+  display: grid;
+  grid-template-columns: 20px 1200px 20px ;
+  grid-template-rows: 20px 95px 20px 490px 20px 380px 20px;
+  background-color: #5BD68F;
+}
+
+
+.Rheader {
+  grid-column: 2/ 3;
+  grid-row: 2/ 3;
+  background-color: white;
+}
+
+.Rmiddle {
+  grid-column: 2/ 3;
+  grid-row: 4/ 5;
+  background-color: white;
+}
+
+.Rfooter {
+  grid-column: 2/ 3;
+  grid-row: 6/ 7;
+  background-color: white;
+}
+
+.left {
+  display: grid;
+  grid-template-columns: 640px 20px;
+  grid-template-rows: 20px 220px 20px 490px 20px 260px 20px;
+  background-color: #5BD68F;
+}
+
+.Lheader {
+  grid-column: 1/ 2;
+  grid-row: 2/ 3;
+  background-color: white;
+}
+
+.Lmiddle {
+  grid-column: 1/ 2;
+  grid-row: 4/ 5;
+  background-color: white;
+}
+
+.Lfooter {
+  grid-column: 1/ 2;
+  grid-row: 6/ 7;
+    background-color: white;
+}
+
 .w_container {
   width: 800px;
   height: 372px;
   border: 1px solid black;
   border-radius: 30px;
   background-color: #5bd68e4d;
+  display: none;
 }
 
 .upper {
@@ -110,8 +178,12 @@ body {
   width: 100%;
 }
 
+.searchForm {
+  display: none;
+}
+
 .bookmarkForm {
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 
