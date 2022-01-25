@@ -114,18 +114,22 @@ body {
   grid-column: 2/ 3;
   grid-row: 2/ 3;
   background-color: white;
+  border-radius: 15px;
+  
 }
 
 .Rmiddle {
   grid-column: 2/ 3;
   grid-row: 4/ 5;
   background-color: white;
+  border-radius: 15px;
 }
 
 .Rfooter {
   grid-column: 2/ 3;
   grid-row: 6/ 7;
   background-color: white;
+  border-radius: 15px;
 }
 
 .left {
@@ -139,18 +143,21 @@ body {
   grid-column: 1/ 2;
   grid-row: 2/ 3;
   background-color: white;
+  border-radius: 15px;
 }
 
 .Lmiddle {
   grid-column: 1/ 2;
   grid-row: 4/ 5;
   background-color: white;
+  border-radius: 15px;
 }
 
 .Lfooter {
   grid-column: 1/ 2;
   grid-row: 6/ 7;
-    background-color: white;
+  background-color: white;
+  border-radius: 15px;
 }
 
 .w_container {
