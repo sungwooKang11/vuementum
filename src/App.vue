@@ -1,93 +1,111 @@
 <template>
   <div class="all">  
     <div class="right">
-      <div class="Rheader"></div>
-      <div class="Rmiddle"></div>
-      <div class="Rfooter"></div>
+      <div class="Rheader">
+        <!--검색 폼-->
+        <form class="searchForm" action="https://www.google.com/search" method="GET">
+          <input class="search" name="q" placeholder="search">
+        </form>
+      </div>
+      <div class="Rmiddle"> 
+        <!-- 날씨 배경 -->
+        <img class="img" :src="require(`./images/${img}.jpg`)">        
+        <!-- 토글스위치 -->
+        <div class="switch-component-wrapper">
+          <div class="class switch-wrapper" @click="switchOnOff" :class="{'on' : onOff, 'off': !onOff }">
+            <div class="circle">
+            </div>
+          </div>
+        </div>
+        <!-- 시계 -->
+        <div class="clock">
+          <h1> {{afbf}} {{hours}} : {{minutes}}</h1>
+        </div>
+        <!-- 로그인폼 -->
+        <form class="loginForm" @submit="Login" v-bind:class="{ hide : LoginFormHidden}">
+          <input 
+          class="loginInput"
+          required
+          maxlength="15"
+          type="text"
+          placeholder="What is your name?"
+          v-model="id"
+          />
+        </form>
+        <!-- 로그인 인사-->
+        <h1 id="greeting" v-bind:class="{ hide : GreetingHidden}"> Hi! {{id}} </h1>
+        <!-- 명언 -->
+        <p> {{quote}} </p>
+        <p> {{author}} </p>
+      </div>
+      <div class="Rfooter">  
+        <div class="upper">
+          <!-- 오늘 날씨 -->
+          <div class="dailyWeather">
+            <span class="day">{{day}}</span> <br>
+            <span class="city">{{city}}</span>
+          </div>
+        </div>
+        <div class="down">
+          <!--일주일 날씨-->
+          <div class="weeklyWeather" v-for="(day,i) in weather" :key="i">
+            <span>{{day.weather[0].date}}</span>
+            <span>{{day.weather[0].main}}</span><br>
+            <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
+          </div>
+        </div>
+      </div>
     </div>
+      
     <div class="left">
-      <div class="Lheader"></div>
-      <div class="Lmiddle"></div>
-      <div class="Lfooter"></div>
+      <div class="Lheader">
+        <!-- 북마크  폼-->
+        <form @submit="bookmarkAdd">
+        <input v-model="linkValue" required placeholder="링크 붙여넣기">
+        <input v-model="explainValue" required placeholder="링크 설명">
+        <input type="submit">
+        </form>
+        <!-- 북마크 -->
+        <div class="bmListDiv1">
+            <div class="bmListDiv2" v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
+              <span class="bmExplain">{{bookmark.explain}}</span>
+              <a class="link" v-bind:href="bookmark.link">{{bookmark.link}}</a>
+              <button @click="bookmarkDelete">삭제</button> 
+            </div>
+        </div>
+      </div>
+      <div class="Lmiddle">
+        <!-- todo 폼 -->
+        <form @submit="todoAdd">
+        <input v-model="todoText" class="todo" required type="text" placeholder="Write To Do"/>
+        </form>
+        <!-- todo -->
+        <div class="todoDiv">
+          <ul>
+            <li v-for="todo in todos" :key="todo.id" :id="todo.id" >
+              <span> {{todo.text}} </span> 
+              <button @click="todoDelete">삭제</button> 
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="Lfooter">
+        <!--메모-->
+        <h1 @click="NoteTextHide" v-bind:class="{ hide : NoteTextHidden}">노트</h1>
+        <div v-bind:class="{ hide : NoteHidden}" class="note">
+          <h6 @click="NoteHide" class="shutdown">닫기</h6>
+          <textarea v-model="noteValue" class="noteinput">
+        </textarea>
+        </div>
+      </div>
     </div>
   </div> 
-  <!-- 토글스위치 -->
- <div class="switch-component-wrapper">
-  <div class="class switch-wrapper" @click="switchOnOff" :class="{'on' : onOff, 'off': !onOff }">
-     <div class="circle">
-     </div>
-  </div>
- </div>
- <!-- 시계 -->
-<div class="clock">
- <h1> {{afbf}} {{hours}} : {{minutes}}</h1>
-</div>
-<!-- 로그인폼 -->
-<form @submit="Login" v-bind:class="{ hide : LoginFormHidden}">
- <input 
- required
- maxlength="15"
- type="text"
- placeholder="What is your name?"
- v-model="id"
- />
-</form>
-<!-- 로그인 인사-->
-<h1 id="greeting" v-bind:class="{ hide : GreetingHidden}"> Hi! {{id}} </h1>
-<!-- 명언 -->
-<h1> {{quote}} </h1>
-<h1> {{author}} </h1>
-<!-- todo 폼 -->
-<form @submit="todoAdd">
- <input v-model="todoText" class="todo" required type="text" placeholder="Write To Do"/>
-</form>
-<!-- todo -->
-<ul>
-  <li v-for="todo in todos" :key="todo.id" :id="todo.id" >
-    <span> {{todo.text}} </span> 
-    <button @click="todoDelete">삭제</button> 
-  </li>
-</ul>
-<!-- 오늘 날씨 -->
-<div>
-  <span>{{day}}</span> <br>
-  <span>{{city}}</span>
-</div>
-<!-- 날씨 배경 -->
-<img :src="require(`./images/${img}.jpg`)">
-<h1 @click="NoteTextHide" v-bind:class="{ hide : NoteTextHidden}">노트</h1>
-<div v-bind:class="{ hide : NoteHidden}" class="note">
-  <h6 @click="NoteHide" class="shutdown">닫기</h6>
-  <textarea v-model="noteValue" class="noteinput">
-</textarea>
-</div>
-<!-- 일주일 날씨 -->
-<div class="weeklyWeatherCon">
-  <div v-for="(day,i) in weather" :key="i">
-    <span>{{day.weather[0].date}}</span>
-    <span>{{day.weather[0].main}}</span><br>
-    <span>{{(((day.temp.min) + (day.temp.max)) /2).toFixed(1)}}</span>
-  </div>
-</div>
-<!--검색 폼-->
-  <form class="searchForm" action="https://www.google.com/search" method="GET">
-    <input class="search" name="q" placeholder="search">
-  </form>
 
-<!-- 북마크  폼-->
-<form @submit="bookmarkAdd">
- <input v-model="linkValue" required placeholder="링크 붙여넣기">
- <input v-model="explainValue" required placeholder="링크 설명">
- <input type="submit">
-</form>
-<!-- 북마크 -->
-<div class="bmListDiv1">
-    <div class="bmListDiv2" v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
-      <span class="bmExplain">{{bookmark.explain}}</span>
-      <a class="link" v-bind:href="bookmark.link">{{bookmark.link}}</a>
-      <button @click="bookmarkDelete">삭제</button> 
-    </div>
-</div>
+
+
+
+
+
 
 </template>
 
@@ -320,6 +338,33 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+.todo {
+  border-radius: 8px;
+  width:605px;
+  height: 58px;
+  background-color: rgba(196,196,196, 0.5);
+  border: none;
+  padding-left: 10px;
+  margin-top: 15px;
+  font-size: 20px;
+}
+.todo::placeholder {
+  color:rgb(78, 78, 78);
+  font-size: 20px;
+}
+.todo:focus {
+  outline: none;
+}
+.todoDiv {
+  overflow: scroll;
+  width: 640px;
+  height: 420px;
+}
+.todoDiv::-webkit-scrollbar {
+  display: none;
+}
+
 .font {
   font-size: 24px;
 }
@@ -329,10 +374,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .switch-component-wrapper {
-  display: flex;
+  position: relative;
+  bottom: 490px;
+  left: 3px;
+  z-index: 2;
 }
 .switch-wrapper {
    width: 44px;
@@ -360,8 +407,8 @@ export default {
   border-radius: 18px;
 }
 .note {
-  width: 300px;
-  height: 300px;
+  width: 640px;
+  height: 260px;
   border:1px solid black;
   margin:0;
   border-radius: 14px;
@@ -375,8 +422,6 @@ export default {
 }
 .noteinput::-webkit-scrollbar {
   width:10px;
-  
- 
 }
 .noteinput::-webkit-scrollbar-thumb {
   width:10px;
@@ -396,7 +441,55 @@ export default {
   
 }
 .shutdown {
-  margin:0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.clock {
+  position: relative;
+  bottom: 450px;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.781);
+}
+
+.loginForm {
+  position: relative;
+  bottom: 465px;
+  z-index: 2;
+}
+
+.loginInput {
+  border: none;
+  border-radius: 15px;
+  width: 300px;
+  height: 60px;
+  font-size: 25px;
+}
+
+.loginInput:focus {
+  outline: none;
+}
+
+.loginInput::placeholder {
+  font-size: 25px;
+  text-align: center;
+}
+
+#greeting {
+  position: relative;
+  bottom: 470px;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.781);
 }
 /* 성우 코드 */
 body {
@@ -409,7 +502,7 @@ body {
 
 .right {
   display: grid;
-  grid-template-columns: 20px 1200px 20px ;
+  grid-template-columns: 20px 1195px 20px ;
   grid-template-rows: 20px 95px 20px 490px 20px 380px 20px;
   background-color: #5BD68F;
 }
@@ -439,7 +532,7 @@ body {
 
 .left {
   display: grid;
-  grid-template-columns: 640px 20px;
+  grid-template-columns: 635px 20px;
   grid-template-rows: 20px 220px 20px 490px 20px 260px 20px;
   background-color: #5BD68F;
 }
@@ -465,13 +558,20 @@ body {
   border-radius: 15px;
 }
 
-.w_container {
+.weeklyWeatherCon {
   width: 800px;
   height: 372px;
   border: 1px solid black;
   border-radius: 30px;
   background-color: #5bd68e4d;
-  display: none;
+}
+
+.weeklyWeather {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin-left: 40px;
+  justify-content: center;
 }
 
 .upper {
@@ -482,6 +582,7 @@ body {
 .down {
     width: 800px;
     height: 186px;
+    border-top: 1px solid black;
     display: flex;
 }
 
@@ -491,7 +592,13 @@ body {
 }
 
 .searchForm {
-  display: none;
+  width: 650px;
+  height: 60px;
+}
+
+.search {
+  width: 650px;
+  height: 60px;
 }
 
 .bookmarkForm {
