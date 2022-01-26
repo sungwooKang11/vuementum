@@ -1,5 +1,5 @@
 <template>
-  <div class="all">  
+  <div class="all"> 
     <div class="right">
       <div class="Rheader">
         <!--검색 폼-->
@@ -9,31 +9,35 @@
       </div>
       <div class="Rmiddle"> 
         <!-- 날씨 배경 -->
-        <img class="img" :src="require(`./images/${img}.jpg`)">        
-        <!-- 토글스위치 -->
-        <div class="switch-component-wrapper">
-          <div class="class switch-wrapper" @click="switchOnOff" :class="{'on' : onOff, 'off': !onOff }">
-            <div class="circle">
+        <img class="img" :src="require(`./images/${img}.jpg`)">
+        <div class="clockDiv">
+          <!-- 토글스위치 -->
+          <div class="switch-component-wrapper">
+            <div class="class switch-wrapper" @click="switchOnOff" :class="{'on' : onOff, 'off': !onOff }">
+              <div class="circle">
+              </div>
             </div>
           </div>
+          <!-- 시계 -->
+          <div class="clock">
+            <h1> {{afbf}} {{hours}} : {{minutes}}</h1>
+          </div>
         </div>
-        <!-- 시계 -->
-        <div class="clock">
-          <h1> {{afbf}} {{hours}} : {{minutes}}</h1>
+        <div class="loginDiv">
+          <!-- 로그인폼 -->
+          <form class="loginForm" @submit="Login" v-bind:class="{ hide : LoginFormHidden}">
+            <input 
+            class="loginInput"
+            required
+            maxlength="15"
+            type="text"
+            placeholder="What is your name?"
+            v-model="id"
+            />
+          </form>
+          <!-- 로그인 인사-->
+          <h1 id="greeting" v-bind:class="{ hide : GreetingHidden}"> Hi! {{id}} </h1>
         </div>
-        <!-- 로그인폼 -->
-        <form class="loginForm" @submit="Login" v-bind:class="{ hide : LoginFormHidden}">
-          <input 
-          class="loginInput"
-          required
-          maxlength="15"
-          type="text"
-          placeholder="What is your name?"
-          v-model="id"
-          />
-        </form>
-        <!-- 로그인 인사-->
-        <h1 id="greeting" v-bind:class="{ hide : GreetingHidden}"> Hi! {{id}} </h1>
         <!-- 명언 -->
         <p> {{quote}} </p>
         <p> {{author}} </p>
@@ -60,17 +64,17 @@
     <div class="left">
       <div class="Lheader">
         <!-- 북마크  폼-->
-        <form @submit="bookmarkAdd">
-        <input v-model="linkValue" required placeholder="링크 붙여넣기">
-        <input v-model="explainValue" required placeholder="링크 설명">
-        <input type="submit">
+        <form class="bmForm" @submit="bookmarkAdd">
+          <input class="linkValue" v-model="linkValue" required placeholder="Link">
+          <input class="explainValue" v-model="explainValue" required placeholder="Link name">
+          <input class="submitBtn" type="submit" placeholder="submit">
         </form>
         <!-- 북마크 -->
         <div class="bmListDiv1">
             <div class="bmListDiv2" v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
               <span class="bmExplain">{{bookmark.explain}}</span>
               <a class="link" v-bind:href="bookmark.link">{{bookmark.link}}</a>
-              <button @click="bookmarkDelete">삭제</button> 
+              <button class="deleteBtn" @click="bookmarkDelete">delete</button> 
             </div>
         </div>
       </div>
@@ -84,7 +88,7 @@
           <ul>
             <li v-for="todo in todos" :key="todo.id" :id="todo.id" >
               <span> {{todo.text}} </span> 
-              <button @click="todoDelete">삭제</button> 
+              <button @click="todoDelete">delete</button> 
             </li>
           </ul>
         </div>
@@ -346,7 +350,7 @@ export default {
   background-color: rgba(196,196,196, 0.5);
   border: none;
   padding-left: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 20px;
 }
 .todo::placeholder {
@@ -375,9 +379,24 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+.clockDiv {
+  position: relative;
+  bottom: 450px;
+  display: flex;
+  justify-content: center;
+}
+
+.clock {
+  position: relative;
+  
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.781);
+}
+
 .switch-component-wrapper {
   position: relative;
-  bottom: 490px;
+  height: 26px;
   left: 3px;
   z-index: 2;
 }
@@ -406,6 +425,100 @@ export default {
   height: 18px;
   border-radius: 18px;
 }
+
+.bmForm {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.linkValue {
+  width: 275px;
+  height: 58px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: none;
+  background-color: rgba(196,196,196, 0.5);
+  padding-left: 10px;
+}
+
+.linkValue:focus {
+  outline: none;
+}
+
+.linkValue::placeholder {
+  color:rgb(78, 78, 78);
+  font-size: 20px;
+}
+
+.explainValue {
+  width: 275px;
+  height: 58px;
+  background-color: rgba(196,196,196, 0.5);
+  border: none;
+}
+
+.explainValue::placeholder {
+  color:rgb(78, 78, 78);
+  font-size: 20px;
+}
+
+.explainValue:focus {
+  outline: none;
+}
+
+.submitBtn {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+  border-left: 1px solid #c4c4c4;
+  background-color: rgba(196,196,196, 0.5);
+}
+
+.submitBtn::placeholder {
+  color:rgb(78, 78, 78);
+  font-size: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+.bmListDiv1 {
+  margin-top: 10px;
+}
+
+.bmListDiv2{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.bmExplain {
+  margin-left: 10px;
+  border: 0.5px solid #c4c4c4;
+  border-radius: 5px;
+}
+
+.link {
+  border-radius: 5px;
+}
+
+.deleteBtn {
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
 .note {
   width: 640px;
   height: 260px;
@@ -455,11 +568,9 @@ export default {
   z-index: 1;
 }
 
-.clock {
-  position: relative;
-  bottom: 450px;
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.781);
+.loginDiv {
+  display: flex;
+  justify-content: center;
 }
 
 .loginForm {
@@ -474,6 +585,7 @@ export default {
   width: 300px;
   height: 60px;
   font-size: 25px;
+  background-color: rgba(255, 255, 255, 0.781);
 }
 
 .loginInput:focus {
@@ -575,6 +687,7 @@ body {
 }
 
 .upper {
+  display: flex;
   width: 800px;
   height: 186px;
 }
@@ -586,19 +699,43 @@ body {
     display: flex;
 }
 
-.dayWeather {
-  padding: 5px;
-  width: 100%;
+.dailyWeather {
+  width: 50px;
+  padding-top: 10px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+
+
 }
 
 .searchForm {
-  width: 650px;
-  height: 60px;
+  height: 100%;
+  display: flex;
+  justify-content: right;
+  margin-top: 16px;
+  
+  
 }
 
 .search {
   width: 650px;
   height: 60px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(196,196,196, 0.5);
+  margin-right: 70px;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.search::placeholder {
+  font-size: 20px;
+  padding-left: 15px;
 }
 
 .bookmarkForm {
