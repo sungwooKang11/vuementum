@@ -504,7 +504,7 @@ body {
   display: grid;
   grid-template-columns: 20px 1195px 20px ;
   grid-template-rows: 20px 95px 20px 490px 20px 380px 20px;
-  background-color: #5BD68F;
+  background-color: #5bd68eaf;
 }
 
 
@@ -534,7 +534,7 @@ body {
   display: grid;
   grid-template-columns: 635px 20px;
   grid-template-rows: 20px 220px 20px 490px 20px 260px 20px;
-  background-color: #5BD68F;
+  background-color: #5bd68eaf;
 }
 
 .Lheader {
