@@ -72,8 +72,8 @@
         <!-- 북마크 -->
         <div class="bmListDiv1">
             <div class="bmListDiv2" v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
-              <span class="bmExplain">{{bookmark.explain}}</span>
-              <a class="link" v-bind:href="bookmark.link">{{bookmark.link}}</a>
+
+              <a class="link" v-bind:href="bookmark.link">{{bookmark.explain}}</a>
               <button class="deleteBtn" @click="bookmarkDelete">delete</button> 
             </div>
         </div>
@@ -85,10 +85,10 @@
         </form>
         <!-- todo -->
         <div class="todoDiv">
-          <ul>
-            <li v-for="todo in todos" :key="todo.id" :id="todo.id" >
-              <span> {{todo.text}} </span> 
-              <button @click="todoDelete">delete</button> 
+          <ul class="todoUL">
+            <li class="todoLi" v-for="todo in todos" :key="todo.id" :id="todo.id" >
+              <span class="todoContent"> {{todo.text}} </span> 
+              <button class="todoBtn" @click="todoDelete">delete</button> 
             </li>
           </ul>
         </div>
@@ -362,11 +362,45 @@ export default {
 }
 .todoDiv {
   overflow: scroll;
-  width: 640px;
-  height: 420px;
+  width: 635px;
+  height: 400px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
 }
 .todoDiv::-webkit-scrollbar {
   display: none;
+}
+
+.todoUL {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.todoLi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  background-color: #afe7c778;
+  width: 550px;
+  height: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+
+.todoContent {
+  margin-right: 15px;
+}
+
+.todoBtn {
+  border: none;
+  border-radius: 5px;
+  width: 50px;
+  height: 25px;
+  background-color: #afe7c778;
 }
 
 .font {
@@ -433,13 +467,13 @@ export default {
 }
 
 .linkValue {
-  width: 275px;
+  width: 270px;
   height: 58px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
   border: none;
   background-color: rgba(196,196,196, 0.5);
   padding-left: 10px;
+  margin-right: 5px;
 }
 
 .linkValue:focus {
@@ -452,10 +486,13 @@ export default {
 }
 
 .explainValue {
-  width: 275px;
+  width: 270px;
   height: 58px;
   background-color: rgba(196,196,196, 0.5);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   border: none;
+  padding-left: 10px;
 }
 
 .explainValue::placeholder {
@@ -486,7 +523,15 @@ li {
 
 .bmListDiv1 {
   margin-top: 10px;
+  overflow: scroll;
+  width: 630px;
 }
+
+.bmListDiv1::-webkit-scrollbar {
+  display: none;
+}
+
+
 
 .bmListDiv2{
   display: flex;
