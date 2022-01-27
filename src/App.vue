@@ -70,12 +70,13 @@
           <input class="submitBtn" type="submit" placeholder="submit">
         </form>
         <!-- 북마크 -->
-        <div class="bmListDiv1">
+        <div class="bmListDiv0">
+          <div class="bmListDiv1">
             <div class="bmListDiv2" v-for="bookmark in bookMarks" :key="bookmark.id" :id="bookmark.id">
-
               <a class="link" v-bind:href="bookmark.link">{{bookmark.explain}}</a>
               <button class="deleteBtn" @click="bookmarkDelete">delete</button> 
             </div>
+          </div>
         </div>
       </div>
       <div class="Lmiddle">
@@ -95,11 +96,10 @@
       </div>
       <div class="Lfooter">
         <!--메모-->
-        <h1 @click="NoteTextHide" v-bind:class="{ hide : NoteTextHidden}">노트</h1>
-        <div v-bind:class="{ hide : NoteHidden}" class="note">
-          <h6 @click="NoteHide" class="shutdown">닫기</h6>
+        <div class="note">
           <textarea v-model="noteValue" class="noteinput">
         </textarea>
+        <button class="memoSave" @click="saveNote">저장</button>
         </div>
       </div>
     </div>
@@ -137,8 +137,6 @@ export default {
     city: "", // 사용자의 위치
     weather:"", //일주일 날씨 데이터를 담는 부분
     img: "nothing", //이미지 소스
-    NoteTextHidden:false, //노트 버튼 초기 보여줌
-    NoteHidden:true, //노트 초기 숨겨짐
     noteValue:"", //노트에 쓴 내용
     linkValue:"", //북마크 링크
     explainValue: "", //북마크 설명
@@ -200,7 +198,7 @@ export default {
        }
       this.todos.push(todo);
       this.todoText = ""; 
-      this.saveTodos();
+      this.todoSave();
      },
           //투두 삭제
      todoDelete(e) {
@@ -256,21 +254,16 @@ export default {
     geoError() {
       alert("Where are you?");
     },
-        //노트 버튼 클릭시 노트를 보여주는 함수
-    NoteTextHide() {
-       this.NoteTextHidden = true;
-       this.NoteHidden = false;
-    },
-        //닫기 버튼 클릭시 노트 버튼을 보여주는 함수
-    NoteHide() {
-      this.NoteTextHidden = false;
-      this.NoteHidden = true;
-      localStorage.setItem('note', this.noteValue);
-    
-    },
         //스토레지에서 미리 작성된 노트의 내용을 가져와주는 함수
     getNote() {
       this.noteValue = localStorage.getItem('note');
+    },
+    saveNote() {
+      if(this.noteValue !== null) {
+        localStorage.setItem('note', this.noteValue) 
+      } else {
+        return;
+      }
     },
     //북마크 추가
     bookmarkAdd(a) {
@@ -384,8 +377,8 @@ export default {
   align-items: center;
   margin-top: 10px;
   background-color: #afe7c778;
-  width: 550px;
-  height: 50px;
+  flex: 0 0 50px;
+  width: 500px;
   padding-right: 10px;
   padding-left: 10px;
   border-radius: 10px;
@@ -521,22 +514,36 @@ li {
   list-style: none;
 }
 
-.bmListDiv1 {
-  margin-top: 10px;
-  overflow: scroll;
-  width: 630px;
+.bmListDiv0 {
+  display: flex;
+  justify-content: center;
+
 }
 
 .bmListDiv1::-webkit-scrollbar {
-  display: none;
+   display: none;
 }
 
-
+.bmListDiv1 {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 140px;
+}
 
 .bmListDiv2{
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
+  align-items: center;
+  background-color: #afe7c778;
+  flex: 0 0 50px;
+  width: 500px;
+  margin-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
 }
 
 .bmExplain {
@@ -547,6 +554,7 @@ li {
 
 .link {
   border-radius: 5px;
+  text-decoration: none;
 }
 
 .deleteBtn {
@@ -554,15 +562,6 @@ li {
   border: none;
   border-radius: 5px;
 }
-
-
-
-
-
-
-
-
-
 
 .note {
   width: 640px;
