@@ -99,7 +99,7 @@
         <div class="note">
           <textarea v-model="noteValue" class="noteinput">
         </textarea>
-        <button class="memoSave" @click="saveNote">저장</button>
+        <button class="memoSave" @click="saveNote">save</button>
         </div>
       </div>
     </div>
@@ -393,7 +393,7 @@ export default {
   border-radius: 5px;
   width: 50px;
   height: 25px;
-  background-color: #afe7c778;
+  background-color: #7fbb9985;
 }
 
 .font {
@@ -428,12 +428,12 @@ export default {
   z-index: 2;
 }
 .switch-wrapper {
-   width: 44px;
-   min-height: 22px;
-   display: flex;
-   cursor: pointer;
-   border-radius: 22px;
-   align-items: center;
+  width: 44px;
+  min-height: 22px;
+  display: flex;
+  cursor: pointer;
+  border-radius: 22px;
+  align-items: center;
   padding: 2px;
   transition: all 0.5s;
   background: green;
@@ -561,20 +561,29 @@ li {
   margin-right: 10px;
   border: none;
   border-radius: 5px;
+  width: 50px;
+  height: 25px;
+  background-color: #7fbb9985;
 }
 
 .note {
-  width: 640px;
-  height: 260px;
+  width: 623px;
+  height: 250px;
   border:1px solid black;
   margin:0;
+  margin-top: 5px;
+  padding-left: 10px;
   border-radius: 14px;
+  border:none;  
 }
 .noteinput {
   width: 100%;
   border:none;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   padding: 0;
   height: 90%;
+  font-size: 15px;
   overflow-y:scroll;
 }
 .noteinput::-webkit-scrollbar {
@@ -595,8 +604,16 @@ li {
 }
 .noteinput:focus {
   outline: none; 
-  
 }
+
+.memoSave {
+  border: none;
+  border-radius: 5px;
+  width: 50px;
+  height: 25px;
+  background-color: #7fbb9985;
+}
+
 .shutdown {
   margin: 0;
   display: flex;
