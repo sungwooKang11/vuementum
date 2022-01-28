@@ -1,15 +1,14 @@
 <template>
   <div class="all"> 
-    <div class="right">
-      <div class="Rheader">
+    <div class="left">
+      <div class="Lheader">
         <!--검색 폼-->
         <form class="searchForm" action="https://www.google.com/search" method="GET">
           <input class="search" name="q" placeholder="search">
         </form>
       </div>
-      <div class="Rmiddle"> 
-        <!-- 날씨 배경 -->
-        <img class="img" :src="require(`./images/${img}.jpg`)">
+      <div class="Lmiddle"> 
+
         <div class="clockDiv">
           <!-- 토글스위치 -->
           <div class="switch-component-wrapper">
@@ -38,11 +37,9 @@
           <!-- 로그인 인사-->
           <h1 id="greeting" v-bind:class="{ hide : GreetingHidden}"> Hi! {{id}} </h1>
         </div>
-        <!-- 명언 -->
-        <p> {{quote}} </p>
-        <p> {{author}} </p>
+        
       </div>
-      <div class="Rfooter">  
+      <div class="Lfooter">  
         <div class="upper">
           <!-- 오늘 날씨 -->
           <div class="dailyWeather">
@@ -59,10 +56,19 @@
           </div>
         </div>
       </div>
+      <div class="Lfooter2">
+                <!-- 날씨 배경 -->
+        <img class="img" :src="require(`./images/${img}.jpg`)">
+        <!-- 명언 -->
+        <div class="quoteDiv">
+          <p class="quote"> {{quote}} </p>
+          <p class="author"> {{author}} </p>
+        </div>
+      </div>
     </div>
       
-    <div class="left">
-      <div class="Lheader">
+    <div class="right">
+      <div class="Rheader">
         <!-- 북마크  폼-->
         <form class="bmForm" @submit="bookmarkAdd">
           <input class="linkValue" v-model="linkValue" required placeholder="Link">
@@ -79,7 +85,7 @@
           </div>
         </div>
       </div>
-      <div class="Lmiddle">
+      <div class="Rmiddle">
         <!-- todo 폼 -->
         <form @submit="todoAdd">
         <input v-model="todoText" class="todo" required type="text" placeholder="Write To Do"/>
@@ -94,7 +100,7 @@
           </ul>
         </div>
       </div>
-      <div class="Lfooter">
+      <div class="Rfooter">
         <!--메모-->
         <div class="note">
           <textarea v-model="noteValue" class="noteinput">
@@ -415,10 +421,10 @@ export default {
 }
 
 .clock {
-  position: relative;
+
   
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.781);
+  z-index: -1;
+  color: rgba(44, 31, 31, 0.781);
 }
 
 .switch-component-wrapper {
@@ -567,22 +573,24 @@ li {
 }
 
 .note {
-  width: 623px;
-  height: 250px;
+  width: 620px;
+  height: 245px;
   border:1px solid black;
-  margin:0;
-  margin-top: 5px;
+
+  margin-top: 10px;
   padding-left: 10px;
-  border-radius: 14px;
+  padding-right: 10px;
+
   border:none;  
 }
 .noteinput {
   width: 100%;
+  height: 85%;
   border:none;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   padding: 0;
-  height: 90%;
+  padding-top: 5px;
   font-size: 15px;
   overflow-y:scroll;
 }
@@ -646,9 +654,10 @@ li {
   width: 300px;
   height: 60px;
   font-size: 25px;
-  background-color: rgba(255, 255, 255, 0.781);
+  background-color: rgba(47, 32, 32, 0.781);
+  z-index: 2;
 }
-
+/* rgba(255, 255, 255, 0.781); */
 .loginInput:focus {
   outline: none;
 }
@@ -662,7 +671,7 @@ li {
   position: relative;
   bottom: 470px;
   z-index: 2;
-  color: rgba(255, 255, 255, 0.781);
+  color: rgba(65, 55, 55, 0.781);
 }
 /* 성우 코드 */
 body {
@@ -673,91 +682,106 @@ body {
   display: flex;
 }
 
-.right {
+.left {
   display: grid;
-  grid-template-columns: 20px 1195px 20px ;
+  grid-template-columns: 20px 745px 20px 430px 20px ;
   grid-template-rows: 20px 95px 20px 490px 20px 380px 20px;
   background-color: #5bd68eaf;
 }
 
 
-.Rheader {
-  grid-column: 2/ 3;
+.Lheader {
+  grid-column: 2/ 5;
   grid-row: 2/ 3;
   background-color: white;
   border-radius: 15px;
   
 }
 
-.Rmiddle {
-  grid-column: 2/ 3;
-  grid-row: 4/ 5;
-  background-color: white;
-  border-radius: 15px;
-}
-
-.Rfooter {
-  grid-column: 2/ 3;
-  grid-row: 6/ 7;
-  background-color: white;
-  border-radius: 15px;
-}
-
-.left {
-  display: grid;
-  grid-template-columns: 635px 20px;
-  grid-template-rows: 20px 220px 20px 490px 20px 260px 20px;
-  background-color: #5bd68eaf;
-}
-
-.Lheader {
-  grid-column: 1/ 2;
-  grid-row: 2/ 3;
-  background-color: white;
-  border-radius: 15px;
-}
-
 .Lmiddle {
-  grid-column: 1/ 2;
+  grid-column: 2/ 5;
   grid-row: 4/ 5;
   background-color: white;
   border-radius: 15px;
 }
 
 .Lfooter {
+  grid-column: 2/ 3;
+  grid-row: 6/ 7;
+  background-color: white;
+  border-radius: 15px;
+}
+.Lfooter2 {
+  grid-column: 4/ 5;
+  grid-row: 6/ 7;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.quoteDiv {
+  position: relative;
+  z-index: 1;
+  bottom: 250px;
+  
+}
+
+.quote {
+  color: #fff;
+}
+
+.author {
+  color: #fff;
+}
+
+.right {
+  display: grid;
+  grid-template-columns: 635px 20px;
+  grid-template-rows: 20px 220px 20px 490px 20px 260px 20px;
+  background-color: #5bd68eaf;
+}
+
+.Rheader {
+  grid-column: 1/ 2;
+  grid-row: 2/ 3;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.Rmiddle {
+  grid-column: 1/ 2;
+  grid-row: 4/ 5;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.Rfooter {
   grid-column: 1/ 2;
   grid-row: 6/ 7;
   background-color: white;
   border-radius: 15px;
 }
 
-.weeklyWeatherCon {
-  width: 800px;
-  height: 372px;
-  border: 1px solid black;
-  border-radius: 30px;
-  background-color: #5bd68e4d;
-}
 
 .weeklyWeather {
   display: flex;
   flex-direction: column;
   padding: 5px;
-  margin-left: 40px;
   justify-content: center;
+  align-content: center;
 }
 
 .upper {
   display: flex;
-  width: 800px;
+  width: 745px;
   height: 186px;
 }
 
 .down {
-    width: 800px;
-    height: 186px;
-    border-top: 1px solid black;
-    display: flex;
+  width: 745px;
+  height: 186px;
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .dailyWeather {
@@ -767,7 +791,6 @@ body {
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
-
 
 }
 
