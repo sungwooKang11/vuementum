@@ -765,7 +765,7 @@ body {
 .weeklyWeather {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 10px;
   justify-content: center;
   align-content: center;
 }
