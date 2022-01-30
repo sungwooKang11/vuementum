@@ -43,7 +43,7 @@
               <span class="city">{{city}}</span><i class="fas fa-location-arrow"></i>
               
             </div>
-            <span >{{(((weather[0].temp.min) + (weather[0].temp.max)) /2).toFixed(1)}}</span>
+            <!-- <span >{{(((weather2[0].temp.min) + (weather2[0].temp.max)) /2).toFixed(1)}}</span> -->
           </div>
         </div>
         <div class="line"></div>
@@ -142,6 +142,7 @@ export default {
     day:"", //오늘 날씨
     city: "", // 사용자의 위치
     weather:"", //일주일 날씨 데이터를 담는 부분
+    weather2:"",
     img: "nothing", //이미지 소스
     noteValue:"", //노트에 쓴 내용
     linkValue:"", //북마크 링크
@@ -239,6 +240,7 @@ export default {
     .then((response) => response.json())
     .then((data) => {
        this.weather = data.daily;
+       this.weather2 = data.daily;
        console.log(this.weather);
     }); 
     }, 
@@ -255,7 +257,7 @@ export default {
        this.day = data.weather[0].main;
        this.city = data.name;
        this.img = data.weather[0].main;
-      
+      console.log(this.city);
     }); 
     }, 
     geoError() {
@@ -363,7 +365,7 @@ export default {
 .todoDiv {
   overflow: scroll;
   width: 635px;
-  height: 400px;
+  height: 370px;
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -379,6 +381,7 @@ export default {
 }
 
 .todoLi {
+  font-family: 'Asap', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -396,6 +399,7 @@ export default {
 }
 
 .todoBtn {
+  font-family: 'Asap', sans-serif;
   border: none;
   border-radius: 5px;
   width: 50px;
@@ -424,6 +428,7 @@ export default {
 }
 
 .clock {
+  font-family: 'Asap', sans-serif;
   font-size: 35px;
   color: #73dd9f;
 }
@@ -509,10 +514,11 @@ li {
   display: flex;
   flex-direction: column;
   align-content: center;
-  height: 140px;
+  height: 125px;
 }
 
 .bmListDiv2{
+  font-family: 'Asap', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -537,6 +543,7 @@ li {
 }
 
 .deleteBtn {
+    font-family: 'Asap', sans-serif;
   margin-right: 10px;
   border: none;
   border-radius: 5px;
@@ -557,6 +564,7 @@ li {
   border:none;  
 }
 .noteinput {
+  font-family: 'Asap', sans-serif;
   width: 100%;
   height: 85%;
   border:none;
@@ -589,6 +597,7 @@ li {
 }
 
 .memoSave {
+  font-family: 'Asap', sans-serif;
   border: none;
   border-radius: 5px;
   width: 50px;
@@ -624,7 +633,9 @@ li {
   border-radius: 15px;
   width: 230px;
   height: 60px;
+  font-family: 'Asap', sans-serif;
   font-size: 25px;
+  text-align: center;
   background-color: rgba(255, 255, 255, 0.979);
 }
 /* rgba(255, 255, 255, 0.781); */
@@ -638,11 +649,11 @@ li {
 }
 
 #greeting {
+  font-family: 'Asap', sans-serif;
   color: #73dd9f;
 }
 /* 성우 코드 */
 body {
-  font-family: 'Asap', sans-serif;
   margin: 0;
 }
 
@@ -712,13 +723,17 @@ body {
 }
 
 .quote {
+  font-family: 'Asap', sans-serif;
   color: rgb(255, 255, 255);
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .author {
+  font-family: 'Asap', sans-serif;
   color: #fff;
   margin-top: 15px;
 }
@@ -765,6 +780,7 @@ body {
 .upper {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   width: 745px;
   height: 50%;
@@ -787,14 +803,26 @@ body {
 
 .dailyWeather {
   font-family: 'Asap', sans-serif;
-  width: 50px;
-  padding-top: 10px;
-  padding-left: 10px;
+  width: 725px;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
 
+.day {
+  font-size: 30px;
+  margin-top: 70px;
 }
 
 .locate {
   display: flex;
+}
+
+.city {
+  font-size: 20px;
+  margin-right: 3px;
 }
 
 .searchForm {
@@ -806,6 +834,7 @@ body {
 }
 
 .search {
+  font-family: 'Asap', sans-serif;
   width: 650px;
   height: 60px;
   font-size: 20px;
