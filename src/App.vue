@@ -244,12 +244,12 @@ export default {
        console.log(this.weather);
     }); 
     }, 
-        //일주일 날씨 %온도 가져오는 함수
+        //하루 날씨 %온도 가져오는 함수
     weekWeather(position){
     const lat = position.coords.latitude;
     const log = position.coords.longitude;
      
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${log}&appid=${API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${log}&appid=${API_KEY}`;
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
