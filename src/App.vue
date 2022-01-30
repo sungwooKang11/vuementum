@@ -2,24 +2,19 @@
   <div class="all"> 
     <div class="left">
       <div class="Lheader">
+        <a class="logoContainer">
+          <img class="logo" src="./image/VuementumLogo.jpg">
+        </a>  
         <!--검색 폼-->
         <form class="searchForm" action="https://www.google.com/search" method="GET">
           <input class="search" name="q" placeholder="search">
         </form>
       </div>
       <div class="Lmiddle"> 
-
-        <div class="clockDiv">
-          <!-- 토글스위치 -->
-          <div class="switch-component-wrapper">
-            <div class="class switch-wrapper" @click="switchOnOff" :class="{'on' : onOff, 'off': !onOff }">
-              <div class="circle">
-              </div>
-            </div>
-          </div>
+        <div class="clockDiv" @click="switchOnOff">
           <!-- 시계 -->
           <div class="clock">
-            <h1> {{afbf}} {{hours}} : {{minutes}}</h1>
+            <h1 class="clockNum"> {{afbf}} {{hours}} : {{minutes}}</h1>
           </div>
         </div>
         <div class="loginDiv">
@@ -43,10 +38,15 @@
         <div class="upper">
           <!-- 오늘 날씨 -->
           <div class="dailyWeather">
-            <span class="day">{{day}}</span> <br>
-            <span class="city">{{city}}</span>
+            <span class="day">{{day}}</span><br>
+            <div class="locate">
+              <span class="city">{{city}}</span><i class="fas fa-location-arrow"></i>
+              
+            </div>
+            <span >{{(((weather[0].temp.min) + (weather[0].temp.max)) /2).toFixed(1)}}</span>
           </div>
         </div>
+        <div class="line"></div>
         <div class="down">
           <!--일주일 날씨-->
           <div class="weeklyWeather" v-for="(day,i) in weather" :key="i">
@@ -228,7 +228,7 @@ export default {
      switchOnOff() {
      this.onOff = !this.onOff;
      },
-     //오늘 날씨 불러와주는 함수
+     //일주일 날씨 불러와주는 함수
     todaysWeather(position){
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
@@ -239,6 +239,7 @@ export default {
     .then((response) => response.json())
     .then((data) => {
        this.weather = data.daily;
+       console.log(this.weather);
     }); 
     }, 
         //일주일 날씨 %온도 가져오는 함수
@@ -414,49 +415,21 @@ export default {
 }
 
 .clockDiv {
-  position: relative;
-  bottom: 450px;
+
+
+
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .clock {
-
-  
-  z-index: -1;
-  color: rgba(44, 31, 31, 0.781);
+  font-size: 35px;
+  color: #73dd9f;
 }
 
-.switch-component-wrapper {
-  position: relative;
-  height: 26px;
-  left: 3px;
-  z-index: 2;
-}
-.switch-wrapper {
-  width: 44px;
-  min-height: 22px;
-  display: flex;
-  cursor: pointer;
-  border-radius: 22px;
-  align-items: center;
-  padding: 2px;
-  transition: all 0.5s;
-  background: green;
-}
-.on {
-  background: green;
-  justify-content: flex-end;
-}
-.off {
-  background: gray;
-  justify-content: flex-start;
-}
-.circle {
-  background: #fff;
-  width: 18px;
-  height: 18px;
-  border-radius: 18px;
+.clockNum {
+  margin: 0;
 }
 
 .bmForm {
@@ -593,19 +566,20 @@ li {
   padding-top: 5px;
   font-size: 15px;
   overflow-y:scroll;
+  resize: none;
 }
 .noteinput::-webkit-scrollbar {
   width:10px;
 }
 .noteinput::-webkit-scrollbar-thumb {
   width:10px;
-  background-color: skyblue;
+  background-color: #73dd9f;
   border-radius: 10px;
  
 }
 .noteinput::-webkit-scrollbar-track {
   width:10px;
-  background-color: blanchedalmond;
+  background-color: #73dd9f54;
   border-radius: 10px;
   box-shadow: inset 0px 0px 5px white;
  
@@ -637,25 +611,21 @@ li {
   z-index: 1;
 }
 
-.loginDiv {
-  display: flex;
-  justify-content: center;
+/* .loginDiv {
+
 }
 
 .loginForm {
-  position: relative;
-  bottom: 465px;
-  z-index: 2;
-}
+
+} */
 
 .loginInput {
   border: none;
   border-radius: 15px;
-  width: 300px;
+  width: 230px;
   height: 60px;
   font-size: 25px;
-  background-color: rgba(47, 32, 32, 0.781);
-  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.979);
 }
 /* rgba(255, 255, 255, 0.781); */
 .loginInput:focus {
@@ -668,24 +638,36 @@ li {
 }
 
 #greeting {
-  position: relative;
-  bottom: 470px;
-  z-index: 2;
-  color: rgba(65, 55, 55, 0.781);
+  color: #73dd9f;
 }
 /* 성우 코드 */
 body {
-  width: 100%;
+  font-family: 'Asap', sans-serif;
+  margin: 0;
 }
 
 .all {
   display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+.logoContainer {
+  width: 412px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 412px;
+  height: 67px;
 }
 
 .left {
   display: grid;
-  grid-template-columns: 20px 745px 20px 430px 20px ;
-  grid-template-rows: 20px 95px 20px 490px 20px 380px 20px;
+  grid-template-columns: 30px 745px 25px 430px 25px ;
+  grid-template-rows: 20px 95px 20px 470px 20px 340px 20px;
   background-color: #5bd68eaf;
 }
 
@@ -695,7 +677,8 @@ body {
   grid-row: 2/ 3;
   background-color: white;
   border-radius: 15px;
-  
+  display: flex;
+  justify-content: space-between;
 }
 
 .Lmiddle {
@@ -703,6 +686,9 @@ body {
   grid-row: 4/ 5;
   background-color: white;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Lfooter {
@@ -726,17 +712,21 @@ body {
 }
 
 .quote {
-  color: #fff;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0;
 }
 
 .author {
   color: #fff;
+  margin-top: 15px;
 }
 
 .right {
   display: grid;
-  grid-template-columns: 635px 20px;
-  grid-template-rows: 20px 220px 20px 490px 20px 260px 20px;
+  grid-template-columns: 635px 30px;
+  grid-template-rows: 20px 200px 20px 450px 20px 255px 20px;
   background-color: #5bd68eaf;
 }
 
@@ -763,6 +753,8 @@ body {
 
 
 .weeklyWeather {
+  font-family: 'Asap', sans-serif;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -772,35 +764,45 @@ body {
 
 .upper {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 745px;
-  height: 186px;
+  height: 50%;
+}
+
+.line {
+  width: 725px;
+  height: 1px;
+  background-color: #c4c4c4;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .down {
   width: 745px;
-  height: 186px;
-  border-top: 1px solid black;
+  height: 50%;
   display: flex;
   justify-content: space-evenly;
 }
 
 .dailyWeather {
+  font-family: 'Asap', sans-serif;
   width: 50px;
   padding-top: 10px;
   padding-left: 10px;
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: center;
 
+}
+
+.locate {
+  display: flex;
 }
 
 .searchForm {
   height: 100%;
+  width: 725px;
   display: flex;
   justify-content: right;
   margin-top: 16px;
-  
-  
 }
 
 .search {
