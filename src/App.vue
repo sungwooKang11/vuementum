@@ -1,4 +1,5 @@
 <template>
+
   <div class="all"> 
     <div class="left">
       <div class="Lheader">
@@ -32,7 +33,6 @@
           <!-- 로그인 인사-->
           <h1 id="greeting" v-bind:class="{ hide : GreetingHidden}"> Hi! {{id}} </h1>
         </div>
-        
       </div>
       <div class="Lfooter">  
         <div class="upper">
@@ -111,18 +111,12 @@
     </div>
   </div> 
 
-
-
-
-
-
-
 </template>
 
 <script>
+
 const API_KEY = "40fdd308ac2317c9f38271955e6f8e0d";
-import quoteData from "./data/quoteData";
-//명언 데이터
+import quoteData from "./data/quoteData"; //명언 데이터
 export default {
   name: 'App',
   data() {
@@ -333,6 +327,7 @@ export default {
      this.getSavedBookmark();
     },
 }
+
 </script>
 
 <style>
@@ -419,9 +414,6 @@ export default {
 }
 
 .clockDiv {
-
-
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -501,7 +493,6 @@ li {
 .bmListDiv0 {
   display: flex;
   justify-content: center;
-
 }
 
 .bmListDiv1::-webkit-scrollbar {
@@ -556,11 +547,9 @@ li {
   width: 620px;
   height: 245px;
   border:1px solid black;
-
   margin-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
-
   border:none;  
 }
 .noteinput {
@@ -609,7 +598,6 @@ li {
   margin: 0;
   display: flex;
   justify-content: center;
-  
 }
 
 .img {
@@ -681,7 +669,6 @@ body {
   grid-template-rows: 20px 95px 20px 470px 20px 340px 20px;
   background-color: #5bd68eaf;
 }
-
 
 .Lheader {
   grid-column: 2/ 5;
@@ -869,4 +856,5 @@ body {
 .submitBtn {
   width: 50px;
 }
+
 </style>
